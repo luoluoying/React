@@ -9,25 +9,46 @@ class CommentApp extends Component {
             comments: []
         }
     }
-    handleSubmitInfo(value) {
-        if (!value) return
-        if (!value.username) return alert('请输入用户名')
-        if (!value.content) return alert('请输入评论内容')
-        this.state.comments.push(value)
-        this.setState({
-            comments: this.state.comments
-        })
-        console.log(value)
+    componentWillMount () {
+        this._loadComments()
+    }
+    handleSubmitComment (comment) {
+        if (!comment) return
+        if (!comment.username) return alert('请输入用户名')
+        if (!comment.content) return alert('请输入评论内容')
+        // this.state.comments.push(value)
+        const comments = this.state.comments
+        comments.push(comment)
+        this.setState({ comments})
+        console.log(comment, 3)
+        this._saveComments(comments)
+    }
+    _saveComments(comments) {
+        localStorage.setItem('comment', JSON.stringify(comments));
+    }
+    _loadComments () {
+        let comments = localStorage.getItem('comment');
+        if (comments) {
+            comments = JSON.parse(comments)
+            this.setState({comments})
+        }
+    }
+    handleDeleteComment(index) {
+        console.log(index, 3);
+        const comments = this.state.comments
+        comments.splice(index, 1)
+        this.setState({ comments })
+        this._saveComments(comments)
     }
     render () {
         return (
             <div className="wrapper">
-                <CommentInput submitInfo={this.handleSubmitInfo.bind(this)}/>
-                <CommentList comments={this.state.comments}/>
+                <CommentInput onSubmit={this.handleSubmitComment.bind(this)}/>
+                <CommentList comments={this.state.comments}
+                onDeleteComment={this.handleDeleteComment.bind(this)}/>
             </div>
         )
     }
 }
-
 
 export default CommentApp
