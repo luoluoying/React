@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import Example from './Reacthook';
 // import App from './App';
 // import * as serviceWorker from './serviceWorker';
 
@@ -175,6 +176,7 @@ class Index extends Component {
 }
 
 ReactDOM.render(
-    <Index />,
+    // <Index />,
+    <Example/>,
     document.getElementById('root')
 )
