@@ -31,3 +31,10 @@
     transform: rotate(360deg);
   }
 }
+
+.page{
+  margin: 40px;
+}
+svg{
+  margin: 20px;
+}
