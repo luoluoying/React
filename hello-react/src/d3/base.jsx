@@ -93,117 +93,117 @@ function D3Example(props) {
     // // svg.append('g').call(left)
 
     // 完整柱状图 start
-    const height = 400
-    const width = 400
-    const svg = d3.select('body').select('#svg-page').append('svg').attr('height', height).attr('width', width)
+    // const height = 400
+    // const width = 400
+    // const svg = d3.select('body').select('#svg-page').append('svg').attr('height', height).attr('width', width)
 
-    const padding = {
-      left: 30,
-      right: 30,
-      top: 20,
-      bottom: 20,
-    }
+    // const padding = {
+    //   left: 30,
+    //   right: 30,
+    //   top: 20,
+    //   bottom: 20,
+    // }
 
-    const dataset = [10, 20, 30, 40, 33, 24, 12, 5]
+    // const dataset = [10, 20, 30, 40, 33, 24, 12, 5]
 
-    const xScale = d3.scaleBand()
-    .domain(d3.range(dataset.length))
-    .range([0, width - padding.left - padding.right])
+    // const xScale = d3.scaleBand()
+    // .domain(d3.range(dataset.length))
+    // .range([0, width - padding.left - padding.right])
 
-    console.log(xScale.range, 'xScale', xScale.bandwidth())
+    // console.log(xScale.range, 'xScale', xScale.bandwidth())
 
-    const yScale = d3.scaleLinear()
-    .domain([0, d3.max(dataset)])
-    .range([height - padding.top - padding.bottom, 0])
+    // const yScale = d3.scaleLinear()
+    // .domain([0, d3.max(dataset)])
+    // .range([height - padding.top - padding.bottom, 0])
 
-    const xAxis = d3.axisBottom(xScale)
-    const yAxis = d3.axisLeft(yScale)
+    // const xAxis = d3.axisBottom(xScale)
+    // const yAxis = d3.axisLeft(yScale)
 
-    const rectPadding = 4 // 矩形间距
-    const rects = svg.selectAll('.MyRect')
-    .data(dataset)
-    .enter()
-    .append('rect')
-    .attr('class', 'MyRect')
-    .attr('transform', `translate(${padding.left}, ${padding.top})`)
-    .attr('x', (d, i) => {
-      return xScale(i) + rectPadding/2
-    })
-
-    .attr("y",function (d) {
-      var min=yScale.domain()[0];
-      return yScale(min);
-    })
-    .attr("height",function(d,i){
-        return 0;
-    })
-    .transition()
-    .duration(2000)
-    .delay(function(d,i){
-        return i*400;
-    })
-    .ease(d3.easeBounce)
-  
-    .attr('y', (d) => {
-      return yScale(d)
-    })
-    .attr('width', xScale.bandwidth() - rectPadding)
-    .attr('height', (d) => {
-      return height - padding.top - padding.bottom - yScale(d)
-    })
-    .attr('fill', 'steelblue')
-
-    const text = svg.selectAll('.MyText')
-    .data(dataset)
-    .enter()
-    .append('text')
-    .attr("class","MyText")
-    .attr("transform","translate(" + padding.left + "," + padding.top + ")")
-    .attr("x", function(d,i){
-        return xScale(i) + rectPadding/2;
-    } )
-    .attr("y",function(d){
-      var min = yScale.domain()[0];
-      return yScale(min);
-        // return yScale(d);
-    })
-    .transition()
-    .delay(function(d,i){
-        return i * 200;
-    })
-    .duration(2000)
-    .ease(d3.easeBounce)
-  
-    .attr("y",function(d){
-      return yScale(d);
-    })
-    .attr("dx",function(){
-      return (xScale.bandwidth() - rectPadding)/3;
-    })
-    .attr("dy",function(d){
-        return 20;
-    })
-    .text(function(d){
-        return d;
-    })
-    .style(
-      "fill", "#FFF"
-    )	
-    // .style({
-    //   "fill":"#FFF",
-    //   "text-anchor":"middle"
+    // const rectPadding = 4 // 矩形间距
+    // const rects = svg.selectAll('.MyRect')
+    // .data(dataset)
+    // .enter()
+    // .append('rect')
+    // .attr('class', 'MyRect')
+    // .attr('transform', `translate(${padding.left}, ${padding.top})`)
+    // .attr('x', (d, i) => {
+    //   return xScale(i) + rectPadding/2
     // })
-    //添加x轴
-    svg.append("g")
-    .attr("class","axis")
-    .attr("transform","translate(" + padding.left + "," + (height - padding.bottom) + ")")
-    .call(xAxis); 
 
-    //添加y轴
-    svg.append("g")
-    .attr("class","axis")
-    .attr("transform","translate(" + padding.left + "," + padding.top + ")")
-    .call(yAxis);
+    // .attr("y",function (d) {
+    //   var min=yScale.domain()[0];
+    //   return yScale(min);
+    // })
+    // .attr("height",function(d,i){
+    //     return 0;
+    // })
+    // .transition()
+    // .duration(2000)
+    // .delay(function(d,i){
+    //     return i*400;
+    // })
+    // .ease(d3.easeBounce)
+  
+    // .attr('y', (d) => {
+    //   return yScale(d)
+    // })
+    // .attr('width', xScale.bandwidth() - rectPadding)
+    // .attr('height', (d) => {
+    //   return height - padding.top - padding.bottom - yScale(d)
+    // })
+    // .attr('fill', 'steelblue')
+
+    // const text = svg.selectAll('.MyText')
+    // .data(dataset)
+    // .enter()
+    // .append('text')
+    // .attr("class","MyText")
+    // .attr("transform","translate(" + padding.left + "," + padding.top + ")")
+    // .attr("x", function(d,i){
+    //     return xScale(i) + rectPadding/2;
+    // } )
+    // .attr("y",function(d){
+    //   var min = yScale.domain()[0];
+    //   return yScale(min);
+    //     // return yScale(d);
+    // })
+    // .transition()
+    // .delay(function(d,i){
+    //     return i * 200;
+    // })
+    // .duration(2000)
+    // .ease(d3.easeBounce)
+  
+    // .attr("y",function(d){
+    //   return yScale(d);
+    // })
+    // .attr("dx",function(){
+    //   return (xScale.bandwidth() - rectPadding)/3;
+    // })
+    // .attr("dy",function(d){
+    //     return 20;
+    // })
+    // .text(function(d){
+    //     return d;
+    // })
+    // .style(
+    //   "fill", "#FFF"
+    // )	
+    // // .style({
+    // //   "fill":"#FFF",
+    // //   "text-anchor":"middle"
+    // // })
+    // //添加x轴
+    // svg.append("g")
+    // .attr("class","axis")
+    // .attr("transform","translate(" + padding.left + "," + (height - padding.bottom) + ")")
+    // .call(xAxis); 
+
+    // //添加y轴
+    // svg.append("g")
+    // .attr("class","axis")
+    // .attr("transform","translate(" + padding.left + "," + padding.top + ")")
+    // .call(yAxis);
 
     // 完整柱状图 end
 
@@ -247,6 +247,66 @@ function D3Example(props) {
 
     // 动态效果end
 
+    // 图形 饼状图 start
+    // const height = 400
+    // const width = 400
+    // const svg = d3.select('body').select('#svg-page').append('svg').attr('height', height).attr('width', width)
+    
+    // const pie = d3.pie()
+    // const dataset = [ 30 , 10 , 43 , 55 , 13 ]
+    // const piedata = pie(dataset)
+
+    // const outerRadius = 150 // 外半径
+    // const innerRadius = 120 // 内半径， 为0 则没有空白
+    // const arc = d3.arc()
+    // .innerRadius(innerRadius)
+    // .outerRadius(outerRadius)
+
+    // const arcs = svg.selectAll('g')
+    // .data(piedata)
+    // .enter()
+    // .append('g')
+    // .attr('transform', `translate(${width/2}, ${width/2})`)
+
+    // const color = d3.scaleOrdinal(d3.schemeCategory10)
+    // arcs.append('path')
+    // .attr('fill', (d, i) => {
+    //   return color(i)
+    // })
+    // .attr('d', (d) => {
+    //   return arc(d)
+    // })
+
+    // arcs.append('text')
+    // .attr('transform', (d) => {
+    //   return `translate(${arc.centroid(d)})`
+    // })
+    // .attr('text-anchor', 'middle')
+    // .text((d) => {
+    //   return d.data
+    // })
+
+    // 力导向图
+    const height = 400
+    const width = 400
+    const svg = d3.select('body').select('#svg-page').append('svg').attr('height', height).attr('width', width)
+
+
+    const nodes = [ { name: "桂林" }, { name: "广州" },
+    { name: "厦门" }, { name: "杭州" },
+    { name: "上海" }, { name: "青岛" },
+    { name: "天津" } ]
+
+    const edges = [ { source : 0 , target: 1 } , { source : 0 , target: 2 } ,
+      { source : 0 , target: 3 } , { source : 1 , target: 4 } ,
+      { source : 1 , target: 5 } , { source : 1 , target: 6 } ]
+
+    // const force = d3.forceSimulation()
+    // .nodes(nodes)
+    // .links(edges)
+    // .size([width, height])
+    // .linkDistance(150)
+    // .charge([-400])
   }, [])
   return (
     <div className="page" id="svg-page">
