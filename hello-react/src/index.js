@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Example from './Reacthook';
+import ContextTest from './context'
 // import App from './App';
 // import * as serviceWorker from './serviceWorker';
 
@@ -177,6 +178,7 @@ class Index extends Component {
 
 ReactDOM.render(
     // <Index />,
-    <Example/>,
+    // <Example/>,
+    <ContextTest />,
     document.getElementById('root')
 )
