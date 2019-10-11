@@ -286,125 +286,59 @@ function D3Example(props) {
     //   return d.data
     // })
 
-    // 力导向图
-    const height = 1800
-    const width = 1600
-    const zoom_actions = () => {
-      g.attr('transform', d3.event.transform)
-    }
+    // 力导向图 start
+    // const height = 1800
+    // const width = 1600
+    // const zoom_actions = () => {
+    //   g.attr('transform', d3.event.transform)
+    // }
 
-    const ticked = () => {
-      console.log('ooooss')
-      svg_links.attr('x1', (d) => { return d.source.x })
-      .attr('y1', (d) => { return d.source.y })
-      .attr('x2', (d) => { return d.target.x })
-      .attr('y2', (d) => { return d.target.y })
+    // const ticked = () => {
+    //   console.log('ooooss')
+    //   svg_links.attr('x1', (d) => { return d.source.x })
+    //   .attr('y1', (d) => { return d.source.y })
+    //   .attr('x2', (d) => { return d.target.x })
+    //   .attr('y2', (d) => { return d.target.y })
 
-      svg_nodes.attr('cx', (d) => { return d.x })
-      .attr('cy', (d) => { return d.y })
-      .attr("cx",function(d){return d.x;})
+    //   svg_nodes.attr('cx', (d) => { return d.x })
+    //   .attr('cy', (d) => { return d.y })
+    //   .attr("cx",function(d){return d.x;})
 
-      svg_texts.attr('x', (d) => { return d.x })
-      .attr('y', (d) => { return d.y })
-    }
+    //   svg_texts.attr('x', (d) => { return d.x })
+    //   .attr('y', (d) => { return d.y })
+    // }
 
-    const svg = d3.select('body')
-    .select('#svg-page')
-    .append('svg')
-    .attr('height', height)
-    .attr('width', width)
-    // .call(
-    //   d3.zoom() // 创建缩放行为
-    //   .scaleExtent([-5, 2])
-    //   .on('zoom', zoom_actions) // 设置缩放范围
-    // )
+    // const svg = d3.select('body')
+    // .select('#svg-page')
+    // .append('svg')
+    // .attr('height', height)
+    // .attr('width', width)
+    // // .call(
+    // //   d3.zoom() // 创建缩放行为
+    // //   .scaleExtent([-5, 2])
+    // //   .on('zoom', zoom_actions) // 设置缩放范围
+    // // )
 
 
-    const nodes = [ { name: "桂林" }, { name: "广州" },
-    { name: "厦门" }, { name: "杭州" },
-    { name: "上海" }, { name: "青岛" },
-    { name: "天津" } ]
+    // const nodes = [ { name: "桂林" }, { name: "广州" },
+    // { name: "厦门" }, { name: "杭州" },
+    // { name: "上海" }, { name: "青岛" },
+    // { name: "天津" } ]
 
-    const links = [ { source : 0 , target: 1 } , { source : 0 , target: 2 } ,
-      { source : 0 , target: 3 } , { source : 1 , target: 4 } ,
-      { source : 1 , target: 5 } , { source : 1 , target: 6 } ]
+    // const links = [ { source : 0 , target: 1 } , { source : 0 , target: 2 } ,
+    //   { source : 0 , target: 3 } , { source : 1 , target: 4 } ,
+    //   { source : 1 , target: 5 } , { source : 1 , target: 6 } ]
 
-    // 初始化力学仿真器，通过布局函数格式化数据
-    const simulation = d3.forceSimulation(nodes)
-    .force('link', d3.forceLink(links).distance(100)) // distance 设置连线距离
-    .force('charge', d3.forceManyBody().strength(-100))
-    .force('center', d3.forceCenter(width / 2, height / 2)) // 设置力学仿真器的中心
-    .on('tick', ticked)
-
-    // 监听
-    const dragstarted = (d) => {
-      console.log('ddd', d3.event.active)
-      if (!d3.event.active) simulation.alphaTarget(0.3).restart()
-      console.log(d.x)
-      d.fx = d.x
-      d.fy = d.y
-    }
-
-    const dragged = (d) => {
-      console.log(d, ',,,,', d3.event)
-      d.fx = d3.event.x
-      d.fy = d3.event.y
-    }
-
-    const dragended = (d) => {
-      console.log(d, 'ddddddddsss')
-      if (!d3.event.active) simulation.alphaTarget(0)
-      d.fx = null
-      d.fy = null
-    }
-
-    const color = d3.scaleOrdinal(d3.schemeCategory10)
-
-    const g = svg.append('g')
-    .attr('calss', 'everything')
-
-    const svg_links = g.append('g')
-    .selectAll('line')
-    .data(links)
-    .enter()
-    .append('line')
-    .style('stroke', '#ccc')
-    .style('stroke-width', 3)
-
-    const svg_nodes = g.append('g')
-    .selectAll('circle')
-    .data(nodes)
-    .enter()
-    .append('circle')
-    .attr('r', '20')
-    .attr("cx", function(d) { return d.x; })
-     .attr("cy", function(d) { return d.y; })
-    .style('fill', (d, i) => {
-      return color(i)
-    })
-    .call(
-      // simulation.drag()
-      d3.drag() // 创建一个拖拽行为
-      .on('start', dragstarted)
-      .on('drag', dragged)
-      .on('end', dragended)
-    )
-
-    const svg_texts = g.append('g')
-    .selectAll('text')
-    .data(nodes)
-    .enter()
-    .append('text')
-    .style('fill', 'black')
-    .attr('dx', 20)
-    .attr('dy', 8)
-    .text((d) => {
-      return d.name
-    })
+    // // 初始化力学仿真器，通过布局函数格式化数据
+    // const simulation = d3.forceSimulation(nodes)
+    // .force('link', d3.forceLink(links).distance(100)) // distance 设置连线距离
+    // .force('charge', d3.forceManyBody().strength(-100))
+    // .force('center', d3.forceCenter(width / 2, height / 2)) // 设置力学仿真器的中心
+    // .on('tick', ticked)
 
     // // 监听
     // const dragstarted = (d) => {
-    //   if (!d3.event.active) simulation.alphaTarget(0, 3).restart()
+    //   if (!d3.event.active) simulation.alphaTarget(0.3).restart()
     //   d.fx = d.x
     //   d.fy = d.y
     // }
@@ -420,22 +354,157 @@ function D3Example(props) {
     //   d.fy = null
     // }
 
-    // const zoom_actions = () => {
-    //   g.attr('transform', d3.event.transform)
-    // }
+    // const color = d3.scaleOrdinal(d3.schemeCategory10)
 
-    // const ticked = () => {
-    //   svg_links.attr('x1', (d) => { return d.source.x })
-    //   .attr('y1', (d) => { return d.source.y })
-    //   .attr('x2', (d) => { return d.target.x })
-    //   .attr('y2', (d) => { return d.target.y })
+    // const g = svg.append('g')
+    // .attr('calss', 'everything')
 
-    //   svg_nodes.attr('cx', (d) => { return d.x })
-    //   .attr('cy', (d) => { return d.y })
+    // const svg_links = g.append('g')
+    // .selectAll('line')
+    // .data(links)
+    // .enter()
+    // .append('line')
+    // .style('stroke', '#ccc')
+    // .style('stroke-width', 3)
 
-    //   svg_texts.attr('x', (d) => { return d.x })
-    //   .attr('y', (d) => { return d.y })
-    // }
+    // const svg_nodes = g.append('g')
+    // .selectAll('circle')
+    // .data(nodes)
+    // .enter()
+    // .append('circle')
+    // .attr('r', '20')
+    // .attr("cx", function(d) { return d.x; })
+    //  .attr("cy", function(d) { return d.y; })
+    // .style('fill', (d, i) => {
+    //   return color(i)
+    // })
+    // .call(
+    //   // simulation.drag()
+    //   d3.drag() // 创建一个拖拽行为
+    //   .on('start', dragstarted)
+    //   .on('drag', dragged)
+    //   .on('end', dragended)
+    // )
+
+    // const svg_texts = g.append('g')
+    // .selectAll('text')
+    // .data(nodes)
+    // .enter()
+    // .append('text')
+    // .style('fill', 'black')
+    // .attr('dx', 20)
+    // .attr('dy', 8)
+    // .text((d) => {
+    //   return d.name
+    // })
+
+    // 力导向图 end
+
+    // eg
+    const width = window.innerWidth
+    const height = window.innerHeight
+
+    const nodes = d3.range(200).map(() => { return { radius: Math.random() * 12 + 4 } })
+    const root = nodes[0]
+    const color = d3.scaleOrdinal(d3.schemeCategory10)
+
+    root.radius = 0
+    root.fixed = true
+
+    const ticked = (e) => {
+      svg.selectAll("circle")
+          .attr("cx", function(d) { return d.x; })
+          .attr("cy", function(d) { return d.y; });
+    };
+
+    const force = d3.forceSimulation(nodes)
+    .velocityDecay(0.2)
+    .force('x', d3.forceX(width / 2).strength(0.015))
+    .force('y', d3.forceY(height / 2).strength(0.015))
+    // .force('charge', d3.forceManyBody().strength((d, i) => { return i ? 0 : -100 }))
+    .force("collide", d3.forceCollide().radius(function(d){
+      if(d === root){
+        return Math.random() * 50 + 100;
+      }
+      return d.radius + 0.5;
+    }).iterations(5))
+    .on("tick", ticked)
+    // .nodes(nodes)
+    // .force('center', d3.forceCenter(width / 2, height / 2))
+
+    // force.restart()
+
+    const svg = d3.select('body').select('#svg-page').append('svg')
+    .attr('height', height)
+    .attr('width', width)
+
+    svg.selectAll('circle')
+    .data(nodes.slice(1))
+    .enter()
+    .append('circle')
+    .attr('r', (d) => { return d.radius })
+    .style('fill', (d, i) => { return color(i % 3) })
+
+    svg.on("mousemove", function() {
+      var p1 = d3.mouse(this);
+      root.fx = p1[0];
+      root.fy = p1[1];
+      force.alphaTarget(0.3).restart()
+    });
+
+    // end 
+
+    // 碰撞检测
+    // var width = window.innerWidth
+    // var height = window.innerHeight
+
+    // var nodes = d3.range(200).map(function() { return {r: Math.random() * 12 + 4}; }),
+    //     root = nodes[0];
+    // // var color = d3.scaleOrdinal().range(d3.schemeCategory20)
+    // const color = d3.scaleOrdinal(d3.schemeCategory10)
+
+    // root.radius = 0;
+    // root.fixed = true;
+
+    // const forceX = d3.forceX(width / 2).strength(0.015)
+    // const forceY = d3.forceY(height / 2).strength(0.015)
+
+    
+    // var force = d3.forceSimulation()
+    // .velocityDecay(0.2)
+    // .force("x", forceX)
+    // .force("y", forceY)
+    // .force("collide", d3.forceCollide().radius(function(d){
+    //   if(d === root){
+    //     return Math.random() * 50 + 100;
+    //   }
+    //   return d.r + 0.5;
+    // }).iterations(5))
+    // .nodes(nodes).on("tick", ticked);
+
+    // var svg = d3.select("body").append("svg")
+    // .attr("width", width)
+    // .attr("height", height);
+
+    // svg.selectAll("circle")
+    //     .data(nodes.slice(1))
+    //     .enter().append("circle")
+    //     .attr("r", function(d) { return d.r; })
+    //     .style("fill", function(d, i) { return color(i % 3); });
+
+    // function ticked(e) {
+    //     svg.selectAll("circle")
+    //         .attr("cx", function(d) { return d.x; })
+    //         .attr("cy", function(d) { return d.y; });
+    // };
+
+    // svg.on("mousemove", function() {
+    //     var p1 = d3.mouse(this);
+    //     root.fx = p1[0];
+    //     root.fy = p1[1];
+    //     force.alphaTarget(0.3).restart();//reheat the simulation
+    // });
+    // 碰撞检测end
   }, [])
   return (
     <div className="page" id="svg-page">
