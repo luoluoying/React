@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Example from './Reacthook';
-import ContextTest from './context'
+// import Example from './Reacthook';
 // import App from './App';
 // import * as serviceWorker from './serviceWorker';
-
+import D3ExampleComponents from './d3/base'
 // ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
@@ -48,9 +47,15 @@ class Footer extends Component {
 }
 
 class Title extends Component {
+    state={
+        a: 0,
+    }
     handleClickOnTitle (word, e) {
         console.log(this, word)
         console.log(e.target.innerHTML)
+        this.setState({
+            a: 1,
+        })
     }
     render() {
         return (
@@ -179,6 +184,7 @@ class Index extends Component {
 ReactDOM.render(
     // <Index />,
     // <Example/>,
-    <ContextTest />,
+    // <Title />,
+    <D3ExampleComponents />,
     document.getElementById('root')
 )
